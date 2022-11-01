@@ -149,4 +149,45 @@ window.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', modalScroll);
 
 });
-//original repo
+
+  //Используем классы для блоков меню
+  class MenuCard {
+    constructor(src, alt, title, desc, price, transfer) {
+      this.src = src;
+      this.alt = alt;
+      this.title = title;
+      this.desc = desc;
+      this.price = price;
+      this.transfer = 462;
+      this.convertCurrency();
+    }
+
+    convertCurrency() {
+      this.price = this.transfer * this.price;
+    }
+
+    render() {
+      const element = document.createElement('div');
+      element.innerHTML = `
+      <div class="menu__item">
+        <img src="${this.src}" alt="${this.alt}">
+        <h3 class="menu__item-subtitle">${this.title}</h3>
+        <div class="menu__item-descr">${this.desc}</div>
+        <div class="menu__item-divider"></div>
+        <div class="menu__item-price">
+            <div class="menu__item-cost">Цена:</div>
+            <div class="menu__item-total"><span>${this.price}</span> тг/день</div>
+        </div>
+      </div>`;
+      const container = document.querySelector('.menu .container');
+      container.append(element);
+    }
+  }
+
+  const div = new MenuCard(
+    'img/tabs/vegy.jpg',
+    'vegy',
+    'Меню "Фитнес"',
+    'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+    '1'
+  ).render();
